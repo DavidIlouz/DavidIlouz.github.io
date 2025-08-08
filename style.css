@@ -1,0 +1,292 @@
+/*
+ * Base styles for David Ilouz’s personal website.
+ * Defines a soft cream background with near‑black text and Garamond‑like typography.
+ */
+
+/* Root variables for easy colour adjustments */
+:root {
+    --bg-color: #fdf8f1;           /* light cream eggshell */
+    --text-color: #1f1f1f;         /* almost black */
+    --accent-color: #0a3d62;       /* deep navy blue */
+    --highlight-color: #40739e;    /* mid‑tone accent for buttons/links */
+    --font-family: 'EB Garamond', serif;
+}
+
+/* Increase base font size globally by roughly two points to improve readability */
+html {
+    font-size: 18px;
+}
+
+/* Reset and global styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+a {
+    color: var(--highlight-color);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+a:hover {
+    color: var(--accent-color);
+}
+
+/* Section styling */
+.section {
+    padding: 4rem 1rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Hero section layout */
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 2rem;
+}
+
+@media (min-width: 768px) {
+    .hero-content {
+        flex-direction: row;
+        text-align: left;
+        align-items: flex-start;
+    }
+}
+
+.hero-image img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--accent-color);
+}
+
+.hero-text h1 {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+}
+.hero-text p {
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin-bottom: 1.5rem;
+}
+.learn-more {
+    display: inline-block;
+    font-size: 1rem;
+    border: 1px solid var(--highlight-color);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    color: var(--highlight-color);
+}
+.learn-more:hover {
+    background-color: var(--highlight-color);
+    color: var(--bg-color);
+}
+
+/* Timeline */
+#timeline h2 {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.timeline-wrapper {
+    position: relative;
+    margin: 0 auto;
+    padding-left: 2rem;
+    max-width: 800px;
+}
+.timeline-line {
+    position: absolute;
+    left: 20px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: var(--accent-color);
+}
+.timeline-item {
+    position: relative;
+    margin-bottom: 2rem;
+    padding-left: 2.5rem;
+}
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+.timeline-point {
+    position: absolute;
+    left: 12px;
+    top: 0.4rem;
+    width: 12px;
+    height: 12px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+}
+.timeline-content {
+    padding-bottom: 0.5rem;
+}
+.timeline-date {
+    font-weight: bold;
+    color: var(--accent-color);
+    margin-right: 0.5rem;
+}
+.timeline-content h3 {
+    font-size: 1.3rem;
+    margin: 0.3rem 0;
+}
+.timeline-content p {
+    font-size: 1rem;
+    margin: 0.3rem 0;
+    max-width: 600px;
+}
+.future .timeline-date {
+    color: var(--highlight-color);
+    font-style: italic;
+}
+
+/* Contact button */
+.contact-button {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 100;
+}
+.contact-button a {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+    padding: 0.7rem 1.2rem;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+.contact-button a:hover {
+    background-color: var(--highlight-color);
+}
+
+/* ------------------------------------------------------- */
+/* Custom hero and timeline styles overriding older rules  */
+/* Hero occupies most of the viewport and centers content */
+.hero {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem 1rem;
+    gap: 2rem;
+}
+@media (min-width: 768px) {
+    .hero {
+        flex-direction: row;
+        align-items: center;
+        text-align: left;
+    }
+}
+/* Adjusted image sizing for hero */
+.hero-image img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--accent-color);
+}
+.hero-text h1 {
+    font-size: 2.4rem;
+    margin-bottom: 1rem;
+}
+.hero-text p {
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin-bottom: 2rem;
+}
+/* Call to action below hero */
+.hero-cta {
+    text-align: center;
+    font-size: 1rem;
+    margin: 1rem 0 2rem;
+}
+.hero-cta a {
+    margin: 0 0.5rem;
+    color: var(--highlight-color);
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+.hero-cta a:hover {
+    color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+/* Timeline overrides */
+#timeline {
+    padding: 2rem 1rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+#timeline h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+.timeline-container {
+    /* Acts as the structural left border for the timeline but no longer scrolls separately */
+    border-left: 2px solid var(--accent-color);
+    padding-left: 2rem;
+    scroll-snap-type: y mandatory;
+}
+.timeline-item {
+    /* Each timeline item occupies most of the viewport height and snaps into place */
+    scroll-snap-align: start;
+    position: relative;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 2rem;
+    opacity: 0.3;
+    transition: opacity 0.4s ease;
+}
+.timeline-item.active {
+    opacity: 1;
+}
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    background-color: var(--accent-color);
+    border-radius: 50%;
+}
+.timeline-date {
+    font-weight: bold;
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+}
+.timeline-title {
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+}
+.timeline-description {
+    font-size: 1rem;
+    max-width: 600px;
+}
+.future .timeline-date {
+    color: var(--highlight-color);
+    font-style: italic;
+}

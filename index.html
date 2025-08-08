@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>David Ilouz</title>
+    <!-- Google font for Garamond-like typography -->
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Hero section with headshot and brief introduction -->
+    <section id="hero" class="hero">
+        <div class="hero-image">
+            <img src="images/headshot.jpg" alt="David Ilouz headshot">
+        </div>
+        <div class="hero-text">
+            <h1>Hi, I'm David Ilouz.</h1>
+            <p>
+                I'm a strategist and researcher with a passion for using data and storytelling to advocate for human rights,
+                responsible governance, and social justice. My work spans community organizing, language and politics
+                research, and data‑driven insights for clients across sectors. I study Data Analytics and Policy at Johns
+                Hopkins University while continuing to support grassroots initiatives like Houston Youth Activists.
+            </p>
+        </div>
+    </section>
+    </section>
+    <div class="hero-cta">
+        <a href="#timeline">Learn more ↓</a> |
+        <a href="mailto:david.a.ilouz.com">Contact me</a>
+    </div>
+
+    <!-- Timeline section -->
+    <section id="timeline">
+        <h2>Highlights &amp; Milestones</h2>
+        <div class="timeline-container">
+            <!-- 2025 Thesis -->
+            <div class="timeline-item future">
+                <span class="timeline-date">2025</span>
+                <span class="timeline-title">Speaking Truth to Power</span>
+                <span class="timeline-description">Undergraduate thesis on language, politics, and human rights selected for publication in NYU's journal <em>The Interdependent</em> (expected Fall 2025).</span>
+            </div>
+            <!-- 2025 Graduate Studies -->
+            <div class="timeline-item future">
+                <span class="timeline-date">2025</span>
+                <span class="timeline-title">M.S. in Data Analytics &amp; Policy, Johns Hopkins University</span>
+                <span class="timeline-description">Pursuing a master’s degree with a concentration in statistical analysis, including a capstone project using machine learning to predict legal case outcomes; graduation expected May 2026.</span>
+            </div>
+            <!-- 2023 NYU Graduation -->
+            <div class="timeline-item">
+                <span class="timeline-date">2023</span>
+                <span class="timeline-title">NYU Graduation &amp; Valedictory Speech</span>
+                <span class="timeline-description">Graduated from New York University as valedictorian with a B.A. in Politics, Rights, and Development; delivered commencement speech (video coming soon).</span>
+            </div>
+            <!-- 2020 Texas Voter Project -->
+            <div class="timeline-item">
+                <span class="timeline-date">2020</span>
+                <span class="timeline-title">Texas Voter Project</span>
+                <span class="timeline-description">Created an online tool to help Texas college students decide where their vote holds the most influence during the pandemic era (links forthcoming).</span>
+            </div>
+            <!-- 2019 Migrant Justice Initiative -->
+            <div class="timeline-item">
+                <span class="timeline-date">2019</span>
+                <span class="timeline-title">Houstonians for Migrant Justice</span>
+                <span class="timeline-description">Organized advocacy and community engagement efforts to support migrant rights in collaboration with local organizations.</span>
+            </div>
+            <!-- 2018 Houston Youth Walkout -->
+            <div class="timeline-item">
+                <span class="timeline-date">2018</span>
+                <span class="timeline-title">Houston Youth Walkout</span>
+                <span class="timeline-description">Coordinated a citywide student walkout advocating for gun violence prevention; delivered a speech and engaged media outlets across Houston.</span>
+            </div>
+            <!-- Placeholder for future events -->
+            <div class="timeline-item future">
+                <span class="timeline-date">More to come</span>
+                <span class="timeline-title"></span>
+                <span class="timeline-description">Stay tuned for upcoming projects, publications, and appearances.</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fixed contact button -->
+    <div class="contact-button">
+        <a href="mailto:david.a.ilouz.com">Reach out to me</a>
+    </div>
+
+    <!-- Script to handle timeline highlighting on scroll -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const items = document.querySelectorAll('.timeline-item');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.intersectionRatio > 0.35) {
+                    entry.target.classList.add('active');
+                } else {
+                    entry.target.classList.remove('active');
+                }
+            });
+        }, { root: null, threshold: 0.35 });
+        items.forEach(item => observer.observe(item));
+    });
+    </script>
+</body>
+</html>
