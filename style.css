@@ -291,28 +291,13 @@ a:hover {
     font-style: italic;
 }
 
-/* Mobile-specific fixes */
-@media (max-width: 768px) {
-  /* Prevent top of image from being cut off */
-  .hero-image img {
-    object-fit: contain;
-    margin-top: 20px;
-  }
-
-  /* Space out hero text and links to avoid overlap */
-  .hero-text {
-    padding: 0 1rem;
-    margin-bottom: 1rem;
-  }
-
-  .hero-cta {
-    margin-top: 1.5rem;
-    display: block;
-    text-align: center;
-  }
-
-  .hero-cta a {
-    display: inline-block;
-    margin: 0.25rem 0.5rem;
-  }
+/* Mobile fix: prevent hero image from getting cut off */
+@media (max-width: 767px) {
+    .hero-image img {
+        width: 180px;
+        height: 180px;
+        object-fit: cover;
+        object-position: center;
+        margin-top: 1rem; /* adds space so it's not clipped at the top */
+    }
 }
