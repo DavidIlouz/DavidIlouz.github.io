@@ -304,9 +304,10 @@ a:hover {
   }
 
   .hero-image img {
-    max-width: 85vw;
-    height: auto;
-    object-fit: contain;
+    width: 85vw;             /* scale with viewport */
+    height: auto;            /* no fixed height */
+    object-fit: cover;       /* preserve aspect ratio while filling */
+    border-radius: 50%;      /* keep circle shape */
     display: block;
   }
 }
