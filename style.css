@@ -291,16 +291,22 @@ a:hover {
     font-style: italic;
 }
 
-/* Mobile image fix */
+/* Fix for mobile cut-off hero image */
 @media (max-width: 768px) {
-  .hero-image img {
-    max-width: 90vw;   /* fit nicely within screen */
-    height: auto;      /* keep aspect ratio */
-    object-fit: contain; /* avoid cropping */
-    margin-top: 20px;  /* push it down from top */
+  .hero {
+    height: auto;           /* allow height to expand naturally */
+    min-height: 100vh;       /* still fill the screen at least */
+    padding-top: 40px;       /* push content down from top */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 
-  .hero {
-    padding-top: 20px; /* extra space above */
+  .hero-image img {
+    max-width: 85vw;
+    height: auto;
+    object-fit: contain;
+    display: block;
   }
 }
