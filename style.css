@@ -291,13 +291,16 @@ a:hover {
     font-style: italic;
 }
 
-/* Mobile fix: prevent hero image from getting cut off */
-@media (max-width: 767px) {
-    .hero-image img {
-        width: 180px;
-        height: 180px;
-        object-fit: cover;
-        object-position: center;
-        margin-top: 1rem; /* adds space so it's not clipped at the top */
-    }
+/* Mobile image fix */
+@media (max-width: 768px) {
+  .hero-image img {
+    max-width: 90vw;   /* fit nicely within screen */
+    height: auto;      /* keep aspect ratio */
+    object-fit: contain; /* avoid cropping */
+    margin-top: 20px;  /* push it down from top */
+  }
+
+  .hero {
+    padding-top: 20px; /* extra space above */
+  }
 }
