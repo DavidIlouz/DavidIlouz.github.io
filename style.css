@@ -290,3 +290,40 @@ a:hover {
     color: var(--highlight-color);
     font-style: italic;
 }
+
+/* --- Mobile spacing fixes (no desktop changes) --- */
+:root {
+  /* Use iOS safe-area if available so top content isn’t cropped */
+  --safe-top: env(safe-area-inset-top, 0px);
+}
+
+/* Make the hero flow naturally on small screens (no fixed height) */
+@media (max-width: 600px) {
+  body {
+    padding-top: var(--safe-top);
+  }
+
+  .hero {
+    height: auto;                 /* was fixed; lets content breathe */
+    padding: 3rem 1rem 2rem;      /* more top/bottom space on phones */
+  }
+
+  .hero-image img {
+    width: 128px;                 /* slightly smaller headshot on mobile */
+    height: 128px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-top: .25rem;
+  }
+
+  .hero-text p {
+    margin-bottom: 1.75rem;       /* keeps CTA from overlapping the blurb */
+  }
+
+  /* Ensure the CTA sits clearly below the hero text */
+  .hero + .hero-cta {
+    margin-top: 1rem;
+    text-align: center;
+    display: block;
+  }
+}
