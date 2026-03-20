@@ -121,9 +121,18 @@ a:hover {
     position: absolute;
     left: var(--line-x);
     top: 0;
-    bottom: 0;
+    bottom: auto;
+    /* spans from top to just past the last dot (6 full panels + dot offset + fade room) */
+    height: calc(600vh + 16vh);
     width: 1.5px;
-    background: linear-gradient(to bottom, transparent 0, transparent 5vh, rgba(10, 61, 98, 0.25) 10.5vh);
+    background: linear-gradient(
+        to bottom,
+        transparent 0,
+        transparent 5vh,
+        rgba(10, 61, 98, 0.25) 10.5vh,
+        rgba(10, 61, 98, 0.25) calc(100% - 5.5vh),
+        transparent 100%
+    );
 }
 
 
