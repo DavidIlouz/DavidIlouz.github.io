@@ -1,25 +1,21 @@
-/*
- * Base styles for David Ilouz’s personal website.
- * Defines a soft cream background with near‑black text and Garamond‑like typography.
- */
-
-/* Root variables for easy colour adjustments */
 :root {
-    --bg-color: #fdf8f1;           /* light cream eggshell */
-    --text-color: #1f1f1f;         /* almost black */
-    --accent-color: #0a3d62;       /* deep navy blue */
-    --highlight-color: #40739e;    /* mid‑tone accent for buttons/links */
+    --bg-color: #fdf8f1;
+    --text-color: #1f1f1f;
+    --accent-color: #0a3d62;
+    --highlight-color: #40739e;
     --font-family: 'EB Garamond', serif;
+    --line-x: 80px;
 }
 
-/* Increase base font size globally by roughly two points to improve readability */
-html {
-    font-size: 18px;
-}
-
-/* Reset and global styles */
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    font-size: 18px;
+    height: 100%;
     margin: 0;
     padding: 0;
 }
@@ -29,7 +25,14 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     line-height: 1.6;
+    overflow: hidden;
+}
+
+.scroll-container {
+    height: 100vh;
+    overflow-y: scroll;
     overflow-x: hidden;
+    scroll-snap-type: y mandatory;
 }
 
 a {
@@ -41,27 +44,34 @@ a:hover {
     color: var(--accent-color);
 }
 
-/* Section styling */
-.section {
-    padding: 4rem 1rem;
-    max-width: 1000px;
-    margin: 0 auto;
+
+/* ─── Snap panels ─── */
+
+.snap-panel {
+    height: 100vh;
+    scroll-snap-align: start;
 }
 
-/* Hero section layout */
-.hero-content {
+
+/* ─── Hero ─── */
+
+.hero {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     text-align: center;
+    padding: 2rem 3rem;
     gap: 2rem;
 }
 
 @media (min-width: 768px) {
-    .hero-content {
+    .hero {
         flex-direction: row;
         text-align: left;
-        align-items: flex-start;
+        align-items: center;
+        padding: 2rem 8rem;
+        gap: 4rem;
     }
 }
 
@@ -70,244 +80,188 @@ a:hover {
     height: 180px;
     border-radius: 50%;
     object-fit: cover;
-    border: 4px solid var(--accent-color);
+    border: 3px solid var(--accent-color);
+    flex-shrink: 0;
 }
 
 .hero-text h1 {
-    font-size: 2.2rem;
+    font-size: 2.4rem;
     margin-bottom: 1rem;
 }
+
 .hero-text p {
-    font-size: 1.1rem;
-    max-width: 600px;
+    font-size: 1.05rem;
+    max-width: 560px;
     margin-bottom: 1.5rem;
-}
-.learn-more {
-    display: inline-block;
-    font-size: 1rem;
-    border: 1px solid var(--highlight-color);
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    color: var(--highlight-color);
-}
-.learn-more:hover {
-    background-color: var(--highlight-color);
-    color: var(--bg-color);
+    color: #3a3a3a;
 }
 
-/* Timeline */
-#timeline h2 {
-    font-size: 1.8rem;
-    margin-bottom: 2rem;
-    text-align: center;
+.scroll-cta {
+    display: inline-block;
+    font-size: 0.95rem;
+    color: var(--highlight-color);
+    border-bottom: 1px solid var(--highlight-color);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
 }
+.scroll-cta:hover {
+    color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+
+/* ─── Timeline wrapper — holds the continuous vertical line ─── */
 
 .timeline-wrapper {
     position: relative;
-    margin: 0 auto;
-    padding-left: 2rem;
-    max-width: 800px;
 }
-.timeline-line {
+
+.timeline-wrapper::before {
+    content: '';
     position: absolute;
-    left: 20px;
+    left: var(--line-x);
     top: 0;
     bottom: 0;
-    width: 2px;
-    background-color: var(--accent-color);
+    width: 1.5px;
+    background: linear-gradient(to bottom, transparent 0, transparent 5vh, rgba(10, 61, 98, 0.25) 10.5vh);
 }
-.timeline-item {
+
+
+/* ─── Each timeline panel ─── */
+
+.timeline-panel {
+    display: flex;
+    align-items: flex-start;
+    padding-top: 10vh;
+    padding-right: 4rem;
+    opacity: 0.2;
+    transition: opacity 0.5s ease;
+}
+
+.timeline-panel.active {
+    opacity: 1;
+}
+
+
+/* ─── Dot column ─── */
+
+.panel-dot-col {
+    width: calc(var(--line-x) * 2);
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 0.4rem;
     position: relative;
-    margin-bottom: 2rem;
-    padding-left: 2.5rem;
+    z-index: 1;
 }
-.timeline-item:last-child {
-    margin-bottom: 0;
-}
-.timeline-point {
-    position: absolute;
-    left: 12px;
-    top: 0.4rem;
-    width: 12px;
-    height: 12px;
-    background-color: var(--accent-color);
+
+.panel-dot {
+    width: 10px;
+    height: 10px;
     border-radius: 50%;
+    border: 2px solid var(--accent-color);
+    background: var(--bg-color);
+    transition: background 0.4s ease, width 0.3s ease, height 0.3s ease, box-shadow 0.3s ease;
 }
-.timeline-content {
-    padding-bottom: 0.5rem;
+
+.timeline-panel.active .panel-dot {
+    background: var(--accent-color);
+    width: 14px;
+    height: 14px;
+    box-shadow: 0 0 0 4px rgba(10, 61, 98, 0.12);
 }
+
+
+/* ─── Panel content ─── */
+
+.panel-content {
+    max-width: 580px;
+}
+
 .timeline-date {
+    display: block;
+    font-size: 0.8rem;
     font-weight: bold;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
     color: var(--accent-color);
-    margin-right: 0.5rem;
+    margin-bottom: 0.6rem;
 }
-.timeline-content h3 {
-    font-size: 1.3rem;
-    margin: 0.3rem 0;
-}
-.timeline-content p {
-    font-size: 1rem;
-    margin: 0.3rem 0;
-    max-width: 600px;
-}
-.future .timeline-date {
+
+.future-date {
     color: var(--highlight-color);
     font-style: italic;
 }
 
-/* Contact button */
+.panel-content h3 {
+    font-size: 1.7rem;
+    line-height: 1.3;
+    margin-bottom: 0.7rem;
+    color: var(--text-color);
+}
+
+.panel-content p {
+    font-size: 1rem;
+    color: #4a4a4a;
+    line-height: 1.75;
+}
+
+
+/* ─── Contact button ─── */
+
 .contact-button {
     position: fixed;
     bottom: 1.5rem;
     right: 1.5rem;
     z-index: 100;
 }
+
 .contact-button a {
     display: inline-block;
     background-color: var(--accent-color);
     color: var(--bg-color);
-    padding: 0.7rem 1.2rem;
+    padding: 0.65rem 1.2rem;
     border-radius: 30px;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: bold;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    letter-spacing: 0.03em;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: background 0.2s ease;
 }
+
 .contact-button a:hover {
     background-color: var(--highlight-color);
 }
 
-/* ------------------------------------------------------- */
-/* Custom hero and timeline styles overriding older rules  */
-/* Hero occupies most of the viewport and centers content */
-.hero {
-    height: 80vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 2rem 1rem;
-    gap: 2rem;
-}
-@media (min-width: 768px) {
-    .hero {
-        flex-direction: row;
-        align-items: center;
-        text-align: left;
+
+/* ─── Mobile ─── */
+
+@media (max-width: 767px) {
+    :root {
+        --line-x: 36px;
     }
-}
-/* Adjusted image sizing for hero */
-.hero-image img {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 4px solid var(--accent-color);
-}
-.hero-text h1 {
-    font-size: 2.4rem;
-    margin-bottom: 1rem;
-}
-.hero-text p {
-    font-size: 1.1rem;
-    max-width: 600px;
-    margin-bottom: 2rem;
-}
-/* Call to action below hero */
-.hero-cta {
-    text-align: center;
-    font-size: 1rem;
-    margin: 1rem 0 2rem;
-}
-.hero-cta a {
-    margin: 0 0.5rem;
-    color: var(--highlight-color);
-    border-bottom: 1px solid transparent;
-    transition: color 0.2s ease, border-color 0.2s ease;
-}
-.hero-cta a:hover {
-    color: var(--accent-color);
-    border-color: var(--accent-color);
-}
 
-/* Timeline overrides */
-#timeline {
-    padding: 2rem 1rem;
-    max-width: 900px;
-    margin: 0 auto;
-}
-#timeline h2 {
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-    text-align: center;
-}
-.timeline-container {
-    /* Acts as the structural left border for the timeline but no longer scrolls separately */
-    border-left: 2px solid var(--accent-color);
-    padding-left: 2rem;
-    scroll-snap-type: y mandatory;
-}
-.timeline-item {
-    /* Each timeline item occupies most of the viewport height and snaps into place */
-    scroll-snap-align: start;
-    position: relative;
-    min-height: 80vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-bottom: 2rem;
-    opacity: 0.3;
-    transition: opacity 0.4s ease;
-}
-.timeline-item.active {
-    opacity: 1;
-}
-.timeline-item::before {
-    content: '';
-    position: absolute;
-    left: -12px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 12px;
-    height: 12px;
-    background-color: var(--accent-color);
-    border-radius: 50%;
-}
-.timeline-date {
-    font-weight: bold;
-    color: var(--accent-color);
-    margin-bottom: 0.5rem;
-}
-.timeline-title {
-    font-size: 1.4rem;
-    margin-bottom: 0.5rem;
-}
-.timeline-description {
-    font-size: 1rem;
-    max-width: 600px;
-}
-.future .timeline-date {
-    color: var(--highlight-color);
-    font-style: italic;
-}
+    html {
+        font-size: 16px;
+    }
 
-/* Fix for mobile cut-off hero image */
-@media (max-width: 768px) {
-  .hero {
-    height: auto;           /* allow height to expand naturally */
-    min-height: 100vh;       /* still fill the screen at least */
-    padding-top: 40px;       /* push content down from top */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 2rem 1.5rem;
+    }
 
-  .hero-image img {
-    width: 85vw;             /* scale with viewport */
-    height: auto;            /* no fixed height */
-    object-fit: cover;       /* preserve aspect ratio while filling */
-    border-radius: 50%;      /* keep circle shape */
-    display: block;
-  }
+    .hero-image img {
+        width: 130px;
+        height: 130px;
+    }
+
+    .timeline-panel {
+        padding-right: 1.5rem;
+    }
+
+    .panel-content h3 {
+        font-size: 1.3rem;
+    }
 }
